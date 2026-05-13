@@ -1,0 +1,45 @@
+﻿global:
+  namespace: helep
+  imagePullPolicy: IfNotPresent
+
+kafka:
+  bootstrap: "kafka-cluster-kafka-bootstrap:9092"
+
+jwt:
+  secret: "helep-super-secret-jwt-key-change-in-prod"
+
+services:
+  userService:
+    image: helep/user-service
+    tag: latest
+    port: 8001
+    replicas: 2
+  sosService:
+    image: helep/sos-service
+    tag: latest
+    port: 8002
+    replicas: 2
+  dispatchService:
+    image: helep/dispatch-service
+    tag: latest
+    port: 8003
+    replicas: 2
+  notificationService:
+    image: helep/notification-service
+    tag: latest
+    port: 8004
+    replicas: 2
+  analyticsService:
+    image: helep/analytics-service
+    tag: latest
+    port: 8005
+    replicas: 1
+
+ingress:
+  enabled: true
+  host: helep.local
+  className: nginx
+
+monitoring:
+  enabled: true
+  grafanaPassword: "helep-admin"

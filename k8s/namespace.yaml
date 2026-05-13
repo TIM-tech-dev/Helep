@@ -1,0 +1,23 @@
+﻿apiVersion: v1
+kind: Namespace
+metadata:
+  name: helep
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helep-config
+  namespace: helep
+data:
+  KAFKA_BOOTSTRAP: "kafka-cluster-kafka-bootstrap:9092"
+  DB_PATH: "/data/db.sqlite"
+  MATCHER: "nearest"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: helep-secrets
+  namespace: helep
+type: Opaque
+stringData:
+  JWT_SECRET: "helep-super-secret-jwt-key-change-in-prod"
